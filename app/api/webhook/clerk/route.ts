@@ -4,7 +4,6 @@
 
 // Resource: https://docs.svix.com/receiving/verifying-payloads/why
 // It's a good practice to verify webhooks. Above article shows why we should do it
-
 import { Webhook, WebhookRequiredHeaders } from "svix";
 import { headers } from "next/headers";
 
@@ -12,16 +11,15 @@ import { IncomingHttpHeaders } from "http";
 
 import { NextResponse } from "next/server";
 import {
-    addMemberToCommunity,
-    createCommunity,
-    deleteCommunity,
-    removeUserFromCommunity,
-    updateCommunityInfo,
-  } from "@/lib/actions/community.actions";
+  addMemberToCommunity,
+  createCommunity,
+  deleteCommunity,
+  removeUserFromCommunity,
+  updateCommunityInfo,
+} from "@/lib/actions/community.actions";
 
 // Resource: https://clerk.com/docs/integration/webhooks#supported-events
 // Above document lists the supported events
-
 type EventType =
   | "organization.created"
   | "organizationInvitation.created"
@@ -47,7 +45,7 @@ export const POST = async (request: Request) => {
   };
 
   // Activitate Webhook in the Clerk Dashboard.
-  // After adding the endpoint, I'll see the secret on the right side.
+  // After adding the endpoint, you'll see the secret on the right side.
   const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
 
   let evnt: Event | null = null;
